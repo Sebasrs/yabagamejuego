@@ -25,15 +25,33 @@ var profileSchema = new mongoose.Schema({
 });
 //*********************************************
 
+//Users on DB
+var users = mongoose.model("user", profileSchema);
+
+//Games on DB
+var games = mongoose.model("game", gameSchema);
+
 app.get('/:userId', function(req,res){
+	res.setHeader('Content-Type', 'application/json');
   var userName = req.params.userId;
-  res.send(userName);
+
+	users.find({Nombre:userName}, function(err, name){
+		res.send(JSON.stringify(name[0]));
+	});
+});
+
+app.get('/logs/:userId', function(req,res){
+	res.setHeader('Content-Type', 'application/json');
+	var userName = req.params.userId;
+
+	games.find({quien:userName}, function(err, games){
+		res.send(JSON.stringify(games));
+	});
 });
 
 app.post('/newUser', function(req,res){
   var body = req.body;
   var name = body.nombre;
-  var users = mongoose.model("user", profileSchema);
 
   users.find({Nombre:name}, function(err, names){
 
@@ -62,8 +80,6 @@ app.post('/sendStats', function(req,res){
   var otherPeople = parseInt(body.cuanta);
   var time = parseInt(body.tiempoJuego);
   var date = body.fecha;
-
-  var games = mongoose.model("game", gameSchema);
 
   games.create({
     cuanto : time,
