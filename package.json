@@ -1,0 +1,16 @@
+{
+  "name": "hardwarethon",
+  "version": "1.0.0",
+  "description": "Hardwarethon tec-abuse solution",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "author": "Sebastian Rivera - Roberto Calderon - Jean Pierre Monterrey",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "mongoose": "^5.2.6"
+  }
+}
