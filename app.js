@@ -33,6 +33,7 @@ var games = mongoose.model("game", gameSchema);
 
 app.get('/:userId', function(req,res){
 	res.setHeader('Content-Type', 'application/json');
+	console.log("GET on '/'")
   var userName = req.params.userId;
 
 	users.find({Nombre:userName}, function(err, name){
@@ -92,6 +93,23 @@ app.post('/sendStats', function(req,res){
   });
 
   res.send("Add game");
+});
+
+app.post('/updateLogros', function(req,res){
+	var body = req.body;
+	var id = body.id;
+	var newAch = body.newLogro;
+	console.log(body);
+	users.find({Nombre:id}, function(err, user){
+		var logros = user[0].Logros;
+		var updatedLog = logros + ',' + newAch;
+		if(updatedLog[0] === ',') updatedLog = updatedLog.substr(1);
+		var newvalues = { $set: {Logros: updatedLog } };
+		var myquery = {Nombre : id};
+		users.updateOne(myquery, newvalues, function(err,response){
+			res.send("Updated " + id);
+		});
+	})
 });
 
 app.listen(PORT, function(){
