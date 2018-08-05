@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Estadisticas de <%= username %></title>
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <h1 style="text-align:center;">Estadisticas de <%= username %></h1>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    <script type="text/javascript" src="/scripts/list.js"></script>
+    <script type="text/javascript">
+      var user = '<%= username %>';
+      var xAxis = [];
+      var dataBefore = [];
+      var dataAfter = [];
+      $.ajax({url: "/getStats/"+user, success: function(obj){
+        obj.forEach(function(object){
+          console.log();
+          var isOnArr = (xAxis.indexOf(object.fecha) > -1);
+          if(!isOnArr) xAxis.push(object.fecha);
+          if(object.state === 'before'){
+            dataBefore.push(object.answer);
+          }else{
+            dataAfter.push(object.answer);
+          }
+        }
+      );
+      setCharVal(xAxis, dataBefore, dataAfter);
+    }});
+    </script>
+    <a href="/">Volver</a>
+  </body>
+</html>
