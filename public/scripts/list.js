@@ -50,7 +50,7 @@ function setCharVal2(x,y){
       },
       yAxis: {
           title: {
-              text: 'Tiempo(s)'
+              text: 'Tiempo(h)'
           }
       },
       plotOptions: {

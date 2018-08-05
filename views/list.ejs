@@ -32,9 +32,9 @@
           var onDates = seenDates.indexOf(object.fecha);
           if(onDates == -1){
             seenDates.push(object.fecha);
-            timesPerDay.push(object.cuanto);
+            timesPerDay.push(object.cuanto/3600);
           }else{
-            timesPerDay[onDates] += object.cuanto;
+            timesPerDay[onDates] += object.cuanto/3600;
           }
         }
       );
