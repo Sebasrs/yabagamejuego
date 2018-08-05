@@ -36,3 +36,34 @@ function setCharVal(xLine, before, after){
       }]
   });
 }
+
+function setCharVal2(x,y){
+  Highcharts.chart('playtime', {
+      chart: {
+          type: 'column'
+      },
+      title: {
+          text: 'Tiempo de juego por actividad realizada por el niño'
+      },
+      xAxis: {
+          categories: x
+      },
+      yAxis: {
+          title: {
+              text: 'Tiempo(s)'
+          }
+      },
+      plotOptions: {
+          line: {
+              dataLabels: {
+                  enabled: true
+              },
+              enableMouseTracking: false
+          }
+      },
+      series: [{
+          name: 'Tiempo de juego',
+          data: y
+      }]
+  });
+}

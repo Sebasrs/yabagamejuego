@@ -14,12 +14,33 @@
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    <div id="playtime" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
     <script type="text/javascript" src="/scripts/list.js"></script>
     <script type="text/javascript">
       var user = '<%= username %>';
       var xAxis = [];
       var dataBefore = [];
       var dataAfter = [];
+      var xAxis2 = [];
+      var yAxis = [];
+
+      $.ajax({url: "/logs/"+user, success: function(obj){
+        var dayCount = 0;
+        var seenDates = [];
+        var timesPerDay = [];
+        obj.forEach(function(object){
+          var onDates = seenDates.indexOf(object.fecha);
+          if(onDates == -1){
+            seenDates.push(object.fecha);
+            timesPerDay.push(object.cuanto);
+          }else{
+            timesPerDay[onDates] += object.cuanto;
+          }
+        }
+      );
+      setCharVal2(seenDates, timesPerDay);
+    }});
+
       $.ajax({url: "/getStats/"+user, success: function(obj){
         obj.forEach(function(object){
           console.log();
