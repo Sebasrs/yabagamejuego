@@ -4,6 +4,38 @@ function setCharVal(xLine, before, after){
   var dataAfter = after;
   //Fill X xAxis
 
+  Highcharts.theme = {
+    colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572',
+             '#FF9655', '#FFF263', '#6AF9C4'],
+    chart: {
+        backgroundColor: '#ced3db',
+    },
+    title: {
+        style: {
+            color: '#000',
+            font: 'bold 16px "Trebuchet MS", Verdana, sans-serif'
+        }
+    },
+    subtitle: {
+        style: {
+            color: '#666666',
+            font: 'bold 12px "Trebuchet MS", Verdana, sans-serif'
+        }
+    },
+
+    legend: {
+        itemStyle: {
+            font: '9pt Trebuchet MS, Verdana, sans-serif',
+            color: 'black'
+        },
+        itemHoverStyle:{
+            color: 'gray'
+        }
+    }
+};
+
+Highcharts.setOptions(Highcharts.theme);
+
   Highcharts.chart('container', {
       chart: {
           type: 'line'
@@ -38,6 +70,7 @@ function setCharVal(xLine, before, after){
 }
 
 function setCharVal2(x,y){
+  Highcharts.setOptions(Highcharts.theme);
   Highcharts.chart('playtime', {
       chart: {
           type: 'column'
