@@ -43,15 +43,15 @@
     }});
 
       $.ajax({url: "/getStats/"+user, success: function(obj){
+        var i = 0;
         obj.forEach(function(object){
-          console.log();
-          var isOnArr = (xAxis.indexOf(object.fecha) > -1);
-          if(!isOnArr) xAxis.push(object.fecha);
+          if(i % 2 === 0) xAxis.push(object.fecha);
           if(object.state === 'before'){
             dataBefore.push(object.answer);
           }else{
             dataAfter.push(object.answer);
           }
+          i++;
         }
       );
       setCharVal(xAxis, dataBefore, dataAfter);
